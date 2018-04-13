@@ -1,0 +1,27 @@
+group 'com.github.mabn'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    jackson_version = "2.9.5"
+}
+
+tasks.withType(JavaCompile) {
+    options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation" << "-Werror" << '-parameters'
+}
+tasks.withType(GroovyCompile) {
+    options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation" << "-Werror"
+}
+
+dependencies {
+    testCompile "junit:junit:4.12"
+    testCompile "com.fasterxml.jackson.core:jackson-databind:$jackson_version"
+    testCompile "com.fasterxml.jackson.module:jackson-module-parameter-names:$jackson_version"
+}
